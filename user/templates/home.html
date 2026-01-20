@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Welcome to Learn Your Spellings!</h2>
+<p>This is the main landing page. Please log in to continue.</p>
+
+<!-- Optional: quick links -->
+{% if user.is_authenticated %}
+<p>Hello, {{ user.username }}!</p>
+{% if user.role == 'parent' %}
+<a href="/parent/">Go to Parent Dashboard</a>
+{% elif user.role == 'child' %}
+<a href="/child/">Go to Child Dashboard</a>
+{% endif %}
+{% else %}
+<a href="/login/">Login</a>
+{% endif %}
+{% endblock %}

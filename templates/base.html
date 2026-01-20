@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Learn Your Spellings{% endblock %}</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Learn Your Spellings</h1>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/parent/">Parent</a>
+            <a href="/child/">Child</a>
+            <a href="/logout/">Logout</a>
+        </nav>
+        <hr>
+    </header>
+
+    <!-- Page content goes here -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <hr>
+        <p>&copy; 2026 Learn Your Spellings</p>
+    </footer>
+
+</body>
+
+</html>
