@@ -1,0 +1,47 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Learn Your Spellings</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                    <!-- Single Dashboard link based on user role -->
+                    {% if user.role == 'parent' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/parent/">Dashboard</a>
+                    </li>
+                    {% elif user.role == 'child' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/child/">Dashboard</a>
+                    </li>
+                    {% else %}
+                    <!-- fallback for superuser or unknown role -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Dashboard</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
+                    </li>
+                    {% else %}
+                    <!-- Logged-out users -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

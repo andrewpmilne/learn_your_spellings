@@ -1,20 +1,61 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home - Learn Your Spellings{% endblock %}
 
 {% block content %}
-<h2>Welcome to Learn Your Spellings!</h2>
-<p>This is the main landing page. Please log in to continue.</p>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
 
-<!-- Optional: quick links -->
-{% if user.is_authenticated %}
-<p>Hello, {{ user.username }}!</p>
-{% if user.role == 'parent' %}
-<a href="/parent/">Go to Parent Dashboard</a>
-{% elif user.role == 'child' %}
-<a href="/child/">Go to Child Dashboard</a>
-{% endif %}
-{% else %}
-<a href="/login/">Login</a>
-{% endif %}
+        {% if user.is_authenticated %}
+        <!-- Logged-in users -->
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Hello, {{ user.username }}!</h3>
+                <p class="mb-4">You are already logged in.</p>
+
+                {% if user.role == 'parent' %}
+                <a href="/parent/" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                {% elif user.role == 'child' %}
+                <a href="/child/" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                {% else %}
+                <a href="/" class="btn btn-secondary btn-lg">Go Home</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% else %}
+        <!-- Logged-out users -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Login</h3>
+
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username"
+                            placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="mb-3 text-end">
+                        <a href="#" class="link-primary">Forgot password?</a>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
 {% endblock %}
